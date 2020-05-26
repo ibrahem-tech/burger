@@ -1,0 +1,20 @@
+{
+  "name": "burger",
+  "version": "1.0.0",
+  "description": "keeping track of burgers",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibrahem-tech/burger.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ibrahem-tech/burger/issues"
+  },
+  "homepage": "https://github.com/ibrahem-tech/burger#readme"
+}
