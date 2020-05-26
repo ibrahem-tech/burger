@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ibrahem-tech/burger/issues"
   },
-  "homepage": "https://github.com/ibrahem-tech/burger#readme"
+  "homepage": "https://github.com/ibrahem-tech/burger#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
