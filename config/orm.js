@@ -1,45 +1,29 @@
-const connection = require('./connection.js');
+var connection = require("../config/connection.js");
 
 var orm = {
-    selectAllDB: function(callback){
-       
-        const queryString = `SELECT * FROM burgers`;
-        connection.query(queryString, function(e,rawResults){
-            if(e) throw e
-            callback(rawResults);
+    selectAll: function (tableInput, cb) {
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        connection.query(queryString, function (err, result) {
+            if (err) throw err;
+            cb(result);
         });
     },
 
-    insertValueToDB: function(userInput, callback){
-       
-        console.log(userInput);
-        const queryString = `INSERT INTO burgers (name) VALUES ("${userInput}")`;
-        connection.query(queryString, function(e){
-            if(e) throw e
-
-            callback();
+    insertOne: function (table, cols, vals, cb) {
+        var queryString = "INSERT INTO ?? (??) VALUES (?)";
+        connection.query(queryString, [table, cols, vals], function (err, result) {
+            if (err) throw err;
+            cb(result);
         });
     },
 
-    updateDevour: function(burgerID, callback){
-        
-        const queryString = `UPDATE burgers SET devoured = TRUE WHERE id = ${burgerID}`;
-        connection.query(queryString, function(e){
-            if(e) throw e
-
-            callback();
-        });
-    },
-
-    deleteFromDb: function(burgerID, callback){
-        const queryString = `DELETE FROM burgers WHERE id = ${burgerID}`;
-        connection.query(queryString, function(e){
-            if(e) throw e
-
-            callback();
+    updateOne: function (table, updateColVal, updateValue, id, cb) {
+        var queryString = "UPDATE ?? SET ?? = ? WHERE id = ?";
+        connection.query(queryString, [table, updateColVal, updateValue, id], function(err, result) {
+            if (err) throw err;
+            cb(result);
         });
     }
+};
 
-}
-// Export the ORM object
 module.exports = orm;

@@ -1,45 +1,48 @@
-<form style="text-align:center; margin-top:20px;" method="POST" action="/">
-    <h1>Burger Eater</h1>
-    <p>What are we eating today?</p>
-    <input name="burger" placeholder="Enter burger name">
-    <button type="submit" class="btn btn-dark">Order</button>
-</form>
-
-<hr>
-
 <div class="container">
-    <div class="row">
-        <div style="text-align: center;" class="col shadow p-3 mb-5 bg-white rounded">
-            <p>Ordered Burgers</p>
-            <div id="ordered">
-                {{#each finalResult}}
-                {{#unless this.isDevour}}
-                <div id="{{this.id}}" style="margin-top: 20px;" class="card text-center">
-                    <div class="card-body">
-                        <p class="card-text">{{this.name}}</p>
-                        <button class="btn btn-primary devourBtn">Devour</button>
-                    </div>
-                </div>
+    <div class="row col title">
+        <div class="col s12">
+            <h1>Eat Burger!</h1>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row devoured-or-not">
+        <div class="col s12 l6" id="notDevoured">
+            <h4>Burgers Menu</h4>
+            <ul>
+                {{#each burgers}}
+                {{#unless this.devoured}}
+                {{> burgers/burger-block devoured=false}}
                 {{/unless}}
                 {{/each}}
-            </div>
+            </ul>
         </div>
 
-        <!-- List of devoured burger -->
-        <div style="text-align: center; margin-left: 10px;" class="col shadow p-3 mb-5 bg-white rounded">
-            <p>Devoured Burgers</p>
-            <div id="devoured">
-                {{#each finalResult}}
-                {{#if this.isDevour}}
-                <div id="{{this.id}}" style="margin-top: 20px;" class="card text-center">
-                    <div class="card-body">
-                        <p class="card-text">{{this.name}}</p>
-                        <button class="btn btn-danger tossBtn">Digest</button>
-                    </div>
-                </div>
+        <div class="col s12 l6" id="devoured">
+            <h4>Burgers Devoured!</h4>
+            <ul>
+                {{#each burgers}}
+                {{#if this.devoured}}
+                {{> burgers/burger-block devoured=true}}
                 {{/if}}
                 {{/each}}
-            </div>
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row create-burger">
+        <div class="col s12">
+            <h4>Add Your Own Burger</h4>
+            <form>
+                <div class="form-group">
+                    <label class="addNewBurger" for="burgerName">Burger Name: </label>
+                    <input type="text" id="burgerName" name="name">
+                </div>
+                <button class="add-burger" id="burgerButton" type="submit">ADD BURGER</button>
+            </form>
         </div>
     </div>
 </div>
