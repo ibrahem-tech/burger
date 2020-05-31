@@ -1,29 +1,44 @@
-var express = require("express");
-var router = express.Router();
-var burger = require("../models/burger.js");
+const express = require('express');
+const router = express.Router();
+const burger = require('../models/burger');
 
-router.get("/", function(req, res) {
-    burger.selectAll(function(data) {
-        var hbsObject = {
-            burgers: data
-        };
-        res.render("index", hbsObject);
+ 
+router.get('/', (req,res) => {
+    burger.selectAllBurgers(function(finalResult){
+        res.render('index', {finalResult});
     });
+})
+
+router.post('/', (req,res) => {
+    const userInput = req.body.burger
+    burger.passToDbForInsert(userInput, function(){
+        console.log('Successfully insert!');
+        res.status(200).redirect('/');
+    })
+})
+
+//Update
+
+router.put('/', (req,res) => {
+    const devouredBurgerID = req.body.id;
+    burger.passToDbForUpdate(devouredBurgerID, function(){
+        console.log('Update complete!');
+        res.json({
+            status: 202,
+            message: 'Devoured!'
+        })
+    })
 });
 
-router.post("/api/burgers", function(req, res) {
-    // console.log(req.body.name);
-    burger.insertOne(req.body.name, function(results) {
-        res.json( {id: results.insertId })
-    });
-});
-
-router.put("/api/burgers/:id", function(req, res) {
-    var id = req.params.id;
-    // console.log(id);
-    burger.updateOne("devoured", true, id, function(results){
-        res.json(results);
-    });
-});
+router.delete('/', (req,res) => {
+    const devouredBurgerID = req.body.id;
+    burger.passToDbForDelete(devouredBurgerID, function(){
+        console.log('Delete complete!');
+        res.json({
+            status: 202,
+            message: 'Toss!'
+        })
+    })
+})
 
 module.exports = router;
