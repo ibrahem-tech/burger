@@ -1,48 +1,62 @@
-<div class="container">
-    <div class="row col title">
-        <div class="col s12">
-            <h1>Eat Burger!</h1>
+<div class="row center-align">
+    <h1>Order your burger now!</h1>
+   
+</div>
+
+<div class="row center-align">
+    <form class="col s12 orderBurger-form">
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix blue-text text-darken-4">local_dining</i>
+                <input id="burger" type="text"></input>
+                <label for="burger">Burger Name</label>
+            </div>
+            <button class="waves-effect waves-gray btn gray darken-4" type="submit" name="action" id="submitBtn">
+                <i class="material-icons left">send</i>Submit</button>
         </div>
-    </div>
+    </form>
+</div>
 
-    <hr>
-
-    <div class="row devoured-or-not">
-        <div class="col s12 l6" id="notDevoured">
-            <h4>Burgers Menu</h4>
-            <ul>
+<div class="row center-align" id="listDiv">
+    <div class="col s12 m6">
+        <div class="row center-align">
+            <h4>Ordered Burgers</h4>
+        </div>
+        <div class="row">
+            <ol id="orderlist">
                 {{#each burgers}}
-                {{#unless this.devoured}}
-                {{> burgers/burger-block devoured=false}}
+                {{#unless devoured}}
+                <li>
+                    {{burger_name}}
+
+                    <button class="waves-effect waves-orange btn-small blue darken-4 devourBtn"
+                        data-burgerid="{{id}}">
+                        choose it!
+                    </button>
+                </li>
                 {{/unless}}
                 {{/each}}
-            </ul>
+            </ol>
         </div>
 
-        <div class="col s12 l6" id="devoured">
-            <h4>Burgers Devoured!</h4>
-            <ul>
-                {{#each burgers}}
-                {{#if this.devoured}}
-                {{> burgers/burger-block devoured=true}}
-                {{/if}}
-                {{/each}}
-            </ul>
-        </div>
     </div>
 
-    <hr>
-
-    <div class="row create-burger">
-        <div class="col s12">
-            <h4>Add Your Own Burger</h4>
-            <form>
-                <div class="form-group">
-                    <label class="addNewBurger" for="burgerName">Burger Name: </label>
-                    <input type="text" id="burgerName" name="name">
-                </div>
-                <button class="add-burger" id="burgerButton" type="submit">ADD BURGER</button>
-            </form>
+    <div class="col s12 m6">
+        <div class="row center-align">
+            <h4>Devoured Burgers</h4>
+            <a class="waves-effect waves-blue btn blue accent-4" id="clear"><i class="material-icons left">clear</i>clear
+                all</a>
+        </div>
+        <div class="row">
+            <ol id="devouredlist">
+                {{#each burgers}}
+                {{#if devoured}}
+                <li>
+                    {{burger_name}}<i class="material-icons right">done</i>
+                </li>
+                {{/if}}
+                {{/each}}
+            </ol>
         </div>
     </div>
 </div>

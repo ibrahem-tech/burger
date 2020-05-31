@@ -1,0 +1,22 @@
+
+
+
+#submitBtn {
+    margin-top: 20px;
+}
+
+#listDiv{
+    padding: 0px 30px;
+    border: 2px rgb(90, 102, 101);
+}
+
+li {
+    font-size: 18px;
+    color: rgb(6, 53, 68);
+    padding: 5px;
+}
+
+.devourBtn{
+    margin-left: 15px;
+    background-color:rgb(6, 49, 63);
+}
